@@ -1,6 +1,6 @@
 pipeline {
  environment {
- imagename = "masoodms/mask-web"
+ imagename = "masoodms/mask-web1"
  image_tag    = "${BUILD_NUMBER}" // Sets version to current Jenkins build number 
  registryCredential = 'masoodms'
  dockerImage = ''
@@ -15,14 +15,14 @@ pipeline {
  stage('Building image') {
  steps{
  script {
- dockerImage = docker.build imagename:image_tag
+ dockerImage = docker.build imagename
  }
  }
  }
  stage('Running image') {
  steps{
  script {
- sh "docker run -itd -P ${imagename}:image_tag"
+ sh "docker run -itd -P ${imagename}:latest"
  }
  }
  }
@@ -31,7 +31,7 @@ pipeline {
  script {
  docker.withRegistry( '', registryCredential ) {
  dockerImage.push("$BUILD_NUMBER")
- // dockerImage.push('latest')
+ dockerImage.push('latest')
  }
  }
  }
