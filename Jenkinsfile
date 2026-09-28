@@ -15,14 +15,14 @@ pipeline {
  stage('Building image') {
  steps{
  script {
- dockerImage = docker.build imagename:"$BUILD_NUMBER"
+ dockerImage = docker.build imagename:image_tag
  }
  }
  }
  stage('Running image') {
  steps{
  script {
- sh "docker run -itd -P ${imagename}:"$BUILD_NUMBER""
+ sh "docker run -itd -P ${imagename}:${image_tag}
  }
  }
  }
