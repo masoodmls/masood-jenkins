@@ -22,7 +22,7 @@ pipeline {
  stage('Running image') {
  steps{
  script {
- sh "docker run -itd -P ${imagename}:${image_tag}
+ sh "docker run -itd -P ${imagename}:image_tag"
  }
  }
  }
