@@ -15,14 +15,14 @@ pipeline {
  stage('Building image') {
  steps{
  script {
- dockerImage = docker.build imagename
+ dockerImage = docker.build imagename:"$BUILD_NUMBER"
  }
  }
  }
  stage('Running image') {
  steps{
  script {
- sh "docker run -itd -P ${imagename}:latest"
+ sh "docker run -itd -P ${imagename}:"$BUILD_NUMBER""
  }
  }
  }
@@ -31,7 +31,7 @@ pipeline {
  script {
  docker.withRegistry( '', registryCredential ) {
  dockerImage.push("$BUILD_NUMBER")
- dockerImage.push('latest')
+ // dockerImage.push('latest')
  }
  }
  }
