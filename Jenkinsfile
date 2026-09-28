@@ -1,4 +1,4 @@
-ipeline {
+ pipeline {
  environment {
  imagename = "masoodms/mask-web" // change the docker id/image name
  image_tag    = "${env.BUILD_NUMBER}" // Sets version to current Jenkins build number
