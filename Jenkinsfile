@@ -2,7 +2,7 @@ ipeline {
  environment {
  imagename = "masoodms/mask-web" // change the docker id/image name
  image_tag    = "${env.BUILD_NUMBER}" // Sets version to current Jenkins build number
- registryCredential = 'masoodms' # docker login id
+ registryCredential = 'masoodms' // docker id
  dockerImage = ''
  }
  agent any
