@@ -1,28 +1,28 @@
- pipeline {
+pipeline {
  environment {
- imagename = "masoodms/mask-web" // change the docker id/image name
- image_tag    = "${env.BUILD_NUMBER}" // Sets version to current Jenkins build number
- registryCredential = 'masoodms' // docker id
+ imagename = "masoodms/qualcom-web"
+ image_tag    = "${BUILD_NUMBER}" // Sets version to current Jenkins build number 
+ registryCredential = 'masoodms'
  dockerImage = ''
  }
  agent any
  stages {
  stage('Cloning Git') {
  steps {
- git([url: 'https://github.com/masoodmls/masood-jenkins.git', branch: 'main'])  // git repo url
+ git([url: 'https://github.com/masoodmls/masood-jenkins.git', branch: 'main'])
  }
  }
  stage('Building image') {
  steps{
  script {
- dockerImage = docker.build imagename:${image_tag}
+ dockerImage = docker.build imagename
  }
  }
  }
  stage('Running image') {
  steps{
  script {
- sh "docker run -itd -P ${imagename}:${image_tag}"
+ sh "docker run -itd -P ${imagename}:latest"
  }
  }
  }
@@ -31,7 +31,7 @@
  script {
  docker.withRegistry( '', registryCredential ) {
  dockerImage.push("$BUILD_NUMBER")
- dockerImage.push("image_tag")
+ dockerImage.push('latest')
  }
  }
  }
