@@ -1,6 +1,6 @@
 pipeline {
  environment {
- imagename = "masoodms/qualcom-web"
+ imagename = "masoodms/mask-web"
  image_tag    = "${BUILD_NUMBER}" // Sets version to current Jenkins build number 
  registryCredential = 'masoodms'
  dockerImage = ''
